@@ -1,13 +1,15 @@
-log = console.log
+const log = console.log
 
-expect = require('chai').expect
-should = require('chai').should()
+const expect = require('chai').expect
+const should = require('chai').should()
 
-_ = require('lodash')
+const _ = require('lodash')
 
 const {
     alwaysTrue,
-    legitString
+    legitString, 
+    getPerson,
+    Person
 } = require('./index')
 describe('#mocha basic', ()=> {
     
@@ -50,6 +52,36 @@ describe('#legitString', ()=>
         legitString(undefined).should.be.false
     })
 })
+
+describe('#index initial conditions', ()=> 
+{
+    it('initial person is an object', ()=>
+    {
+        const person = getPerson();
+        _.isObject(person).should.be.true;
+    });
+ });
+
+ describe('#Person', ()=> { 
+     describe.only("#rollDice", ()=> {
+         it("should return a finite number (not Nan nor Infinity)", ()=>{
+            const number = Person.rollDice(1,20);
+            _.isFinite(number).should.be.true;
+         });
+         it("should not have 0 in a 1000 sample size", ()=> {
+             const sample = new Array(1000);
+             _.fill(sample, 0);
+             log(sample);
+             const rollDiceSamples = _.map(sample, item => Person.rollDice(1,20));
+             log(rollDiceSamples);
+
+             const anyZeros = _.filter(rollDiceSamples, item=> item === 0);
+             anyZeros.length.should.equal(0);
+         });       
+     });
+ });
+
+
 
 
 
