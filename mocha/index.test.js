@@ -9,7 +9,9 @@ const {
     alwaysTrue,
     legitString, 
     getPerson,
-    Person
+    Person,
+    Armor,
+    Weapon
 } = require('./index')
 describe('#mocha basic', ()=> {
     
@@ -63,7 +65,7 @@ describe('#index initial conditions', ()=>
  });
 
  describe('#Person', ()=> { 
-     describe.only("#rollDice", ()=> {
+     describe("#rollDice", ()=> {
          it("should return a finite number (not Nan nor Infinity)", ()=>{
             const number = Person.rollDice(1,20);
             _.isFinite(number).should.be.true;
@@ -78,6 +80,46 @@ describe('#index initial conditions', ()=>
              const anyZeros = _.filter(rollDiceSamples, item=> item === 0);
              anyZeros.length.should.equal(0);
          });       
+     });
+
+     describe('#attack', () => {
+        
+        let personA;
+        let personB; 
+
+        let createPersonFixture = (name) =>{
+            let leatherArmor = new Armor("Leather", 2);
+            let shortSword = new Weapon("Short Sword", 0, 1, 6);
+            return person = new Person(name, 2, 4, 1, [leatherArmor, shortSword]);
+        };
+
+        beforeEach(() => {
+            personA = createPersonFixture('Person A');
+            personB = createPersonFixture('Person B');
+        });
+
+        afterEach(() => {
+            personA = undefined;
+            personB = undefined;
+        });
+
+        it("PersonA's hitpoints start at 11", ()=> {
+            personA.hitPoints.should.equal(11);
+        });
+
+        it("PersonB's hitpoints start at 11", ()=> {
+            personB.hitPoints.should.equal(11);
+        });
+
+         it("PersonA's armorBonus start at 0", ()=> {
+            personA.armorBonus.should.equal(0);
+        });
+
+        it("PersonB's armBonus start at 0", ()=> {
+            personB.armorBonus.should.equal(0);
+        });
+
+
      });
  });
 

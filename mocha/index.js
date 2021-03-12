@@ -16,6 +16,22 @@ class Person
         this.armorBonus = 0;
     }
 
+    static rollDice(howMany, type) {
+        let total = 0;
+        for (let i=0; i<howMany; i++) {
+            total += Math.round(Math.random() * type);
+        }
+
+        return total;
+    }
+
+    attack(target) {
+        let roll = Person.rollDice(1,20);
+        roll = _.clamp(roll, 1, 20);
+        let toHit = 10 + target.armorBonus + target.dexterity;
+        return result >= toHit;
+    }
+
     addEquipment(item) {
         this.equipment.push(item);
         if ( item instanceof Armor) {
@@ -44,15 +60,6 @@ class Person
                 this.armorBonus += item.bonus;
             }
         }
-    }
-
-    static rollDice(howMany, type) {
-        let total = 0;
-        for (let i=0; i<howMany; i++) {
-            total += Math.round(Math.random() * type);
-        }
-
-        return total;
     }
 }
 
@@ -85,4 +92,4 @@ function setupPerson() {
 setupPerson();
 
 getPerson = ()=> person;
-module.exports= { legitString, alwaysTrue, getPerson, Person}
+module.exports= { legitString, alwaysTrue, getPerson, Person, Armor, Weapon};
