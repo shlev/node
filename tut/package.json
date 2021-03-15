@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "execute": "node index.js",
-    "start": "node index.js"
+    "start": "node form.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "cowsay": "^1.4.0",
-    "lodash": "^4.17.21"
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "pug": "^3.0.2"
   }
 }
