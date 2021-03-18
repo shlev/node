@@ -1,0 +1,17 @@
+1. Installing
+npm i -D lerna  
+
+2. Initial
+npx lerna init
+
+3. Grouping
+place all project/artifacts under packages folder
+
+4. Clean packages
+npx lerna clean -y
+
+5. Bootstrap packages
+npx lerna bootstrap --hoist
+
+
+adding scripts to main package.json and relevant artifacts.
