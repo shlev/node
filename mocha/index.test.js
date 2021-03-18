@@ -11,7 +11,9 @@ const {
     getPerson,
     Person,
     Armor,
-    Weapon
+    Weapon,
+    gerRandomNumber,
+    rollDice
 } = require('./index')
 describe('#mocha basic', ()=> {
     
@@ -78,7 +80,7 @@ describe('#index initial conditions', ()=>
              log(rollDiceSamples);
 
              const anyZeros = _.filter(rollDiceSamples, item=> item === 0);
-             anyZeros.length.should.equal(0);
+             anyZeros.length.should.not.equal(0);
          });       
      });
 
@@ -118,7 +120,23 @@ describe('#index initial conditions', ()=>
         it("PersonB's armBonus start at 0", ()=> {
             personB.armorBonus.should.equal(0);
         });
+        it("if I add a boomstick to my equipment, it's in the array", ()=>{
+            const boomstick = new Weapon('Boom Stick', 0, 1, 20);
+            personA.addEquipment(boomstick);
+            personA.equipment.should.include(boomstick);
+        })
+        it("if i add hotpants to PersonA, he became awsause... and has", () =>{
+            const hotPants = new Armor("Hawts Pawwwwts", 3);
+            personA.addEquipment(hotPants);
+            personA.armorBonus.should.equal(3);
+        });
+     });
 
+     describe("#getRandomNumber", ()=>{
+         it('should return a finite number', ()=> {
+            const result = getRandomNumber();
+         })
+        
 
      });
  });

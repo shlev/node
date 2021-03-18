@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "name": "monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "lerna run start --scope {web-client,server-api}",
+    "test": "lerna run test --scope {server-api,web-client}",
+    "new-version": "lerna version --converntional-commits --yes",
+    "diff": "lerna diff"
+  }
+}

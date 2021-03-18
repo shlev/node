@@ -3,6 +3,16 @@ const alwaysTrue = () => true
 
 const legitString = (o) => _.isString(o) && o.length > 0
 
+const getRandomNumber = ()=> Math.random();
+
+const rollDice = (howMany, type, randomNumberFunction = getRandomNumber) => {
+     let total = 0;
+        for (let i=0; i<howMany; i++) {
+            total += Math.round(Math.random() * type);
+        }
+
+        return total;
+}
 class Person 
 {
     constructor(name, strength, dexterity, constitution, equipment) {
@@ -27,6 +37,7 @@ class Person
 
     attack(target) {
         let roll = Person.rollDice(1,20);
+        roll+= this.strength;
         roll = _.clamp(roll, 1, 20);
         let toHit = 10 + target.armorBonus + target.dexterity;
         return result >= toHit;
@@ -92,4 +103,13 @@ function setupPerson() {
 setupPerson();
 
 getPerson = ()=> person;
-module.exports= { legitString, alwaysTrue, getPerson, Person, Armor, Weapon};
+module.exports= { 
+    legitString,
+    alwaysTrue, 
+    getPerson, 
+    Person, 
+    Armor, 
+    Weapon,
+    getRandomNumber,
+    rollDice
+};
